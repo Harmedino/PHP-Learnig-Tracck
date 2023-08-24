@@ -13,7 +13,7 @@
     
 <form action="reg.php" method="post" class='container card shadow mt-5'>
 
-    <h1 class="text-center">SIGN UP</h1>
+    <h1 class="text-center">SIGN IN</h1>
 
    <div class="form-group">
     <label for="name">Name</label>

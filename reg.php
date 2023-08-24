@@ -1,18 +1,37 @@
-<?php  
- $_name = $_POST['name'];
- $_email = $_POST['email'];
-if (isset($_POST['submit'])) {
+<?php
+require_once 'conn.php';
+session_start();
 
-    if (!$_name || !$_email) {
-       echo "fields cannot be empty";
+$name = $_POST['name'];
+$email = $_POST['email'];
+$password = $_POST['email'];
+
+if (isset($_POST['submit'])) {
+    if (!$name) {
+        $_SESSION['nameError'] = "Please fill in the name field";
+        header('Location: index.php'); 
+    }
+
+    if (!$email) {
+        $_SESSION['emailError'] = "Please fill in the email field";
+        header('Location: index.php'); 
+    }
+    if (!$password) {
+        $_SESSION['passwordError'] = "Please fill in the password field";
+        header('Location: index.php'); 
     } else {
-        echo  $_name.' '.$_email;
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $check = mysqli_query($conn, "SELECT email FROM users WHERE email = '$email'");
+
+        if (mysqli_num_rows($check) >= 1) {
+            // echo json_encode(mysqli_fetch_array(#check))
+            echo "Email already exist";
+            die();
+        }
+        $query = mysqli_query($conn, "INSERT INTO users (name, email, password) Values('$name', '$email', '$password')");
+        header('Location: login.php'); 
     }
 } else {
     echo 'Error';
 }
-
-
- 
-
 ?>
