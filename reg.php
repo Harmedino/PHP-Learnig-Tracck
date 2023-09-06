@@ -4,7 +4,7 @@ session_start();
 
 $name = $_POST['name'];
 $email = $_POST['email'];
-$password = $_POST['email'];
+$password = $_POST['password'];
 
 if (isset($_POST['submit'])) {
     if (!$name) {
@@ -25,7 +25,8 @@ if (isset($_POST['submit'])) {
 
         if (mysqli_num_rows($check) >= 1) {
             // echo json_encode(mysqli_fetch_array(#check))
-            echo "Email already exist";
+            $_SESSION['existError'] = "Email already in use";
+            header('Location: index.php'); 
             die();
         }
         $query = mysqli_query($conn, "INSERT INTO users (name, email, password) Values('$name', '$email', '$password')");
