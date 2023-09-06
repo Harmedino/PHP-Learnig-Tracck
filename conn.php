@@ -2,7 +2,7 @@
 $conn= mysqli_connect('localhost','root','','blog');
 
 if ($conn) {
-    echo 'connected';
+    // echo 'connected';
 }else{
     echo 'connection error';
 }
