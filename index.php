@@ -11,7 +11,7 @@
     session_start() 
     ?>
     
-<form action="reg.php" method="post" class='container card shadow mt-5'>
+<form action="reg.php" method="post" class='container card shadow mt-5 p-4'>
 
     <h1 class="text-center">SIGN UP</h1>
 
@@ -32,6 +32,9 @@
 
         
     } unset($_SESSION['emailError'])  ?>
+    <?php if(isset($_SESSION['existError'])){
+       echo " <span  class='text-danger'>". $_SESSION['existError']." </span> ";
+    } unset($_SESSION['existError'])  ?>
    </div>
    <div class="form-group">
     <label for="password">Password</label>
@@ -43,6 +46,9 @@
     } unset($_SESSION['passwordError'])  ?>
    </div>
     <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+    <p class="mt-3"> Already have an account <a href="./login.php" >Login</a></p>
+   
+    
 </form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
